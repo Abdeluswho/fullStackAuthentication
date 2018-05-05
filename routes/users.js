@@ -1,18 +1,15 @@
 const express = require('express');
-const router = express.Router();
+const router = require("express-promise-router")();
 
 const UsersController = require('../controllers/users')
 
-router.post('/signup', (req, res) => {
-    UsersController.signUp
-})
+router.route('/signup')
+    .post(UsersController.signUp)
 
-router.post('/signin', (req, res) => {
-    UsersController.signIn
-})
+router.route('/signin')
+    .post(UsersController.signIn)
 
-router.get('/secret', (req, res) => {
-    UsersController.secret
-})
+router.route('/secret')
+    .get(UsersController.secret)
 
 module.exports = router;
