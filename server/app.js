@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-mongoose.connect('mongodb://localhost/fullAuthentication', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/fullAuthentication');
 
 const app = express();
 
