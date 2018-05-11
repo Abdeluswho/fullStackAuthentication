@@ -28,13 +28,25 @@ passport.use(new JwtStrategy({
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done)=> {
-    // find the user given email
-     const user = await User.findOne({ email })
-    // if not handle it
-     if (!user) {
-         return done(null, false);
-     }
-    // check if pass is correct
 
-    // return the user
+    try {
+            // find the user given email
+        const user = await User.findOne({ email })
+        // if not handle it
+        if (!user) {
+            return done(null, false);
+        }
+        // check if pass is correct
+    
+        const isMatch = await user.isValidPassword (password);
+    
+        if (!isMatch) {
+            return done(null, false);
+        }
+        // return the user
+        done(null, user);
+    } catch (error) {
+       done(error, false); 
+    }
+   
 }))
